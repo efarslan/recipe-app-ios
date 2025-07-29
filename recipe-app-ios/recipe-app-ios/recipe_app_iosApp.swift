@@ -10,11 +10,19 @@ import SwiftUI
 @main
 struct recipe_app_iosApp: App {
     @StateObject var session = user_session()
+    @StateObject var recipeViewModel = RecipeViewModel()
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(session)
+            if session.isLoggedIn {
+                home_view()
+                    .environmentObject(session)
+                    .environmentObject(recipeViewModel)
+            } else {
+                login_view(session: session)
+                    .environmentObject(session)
+                    .environmentObject(recipeViewModel)
+            }
         }
     }
 }

@@ -8,7 +8,12 @@
 import SwiftUI
 
 struct register_view: View {
-    @StateObject private var viewModel = RegisterViewModel()
+    @EnvironmentObject var session: user_session
+    @StateObject private var viewModel: RegisterViewModel
+
+    init(session: user_session) {
+        _viewModel = StateObject(wrappedValue: RegisterViewModel(session: session))
+    }
     
     var body: some View {
         VStack {
@@ -67,5 +72,6 @@ struct register_view: View {
 }
 
 #Preview {
-    register_view()
+    register_view(session: user_session())
+        .environmentObject(user_session())
 }

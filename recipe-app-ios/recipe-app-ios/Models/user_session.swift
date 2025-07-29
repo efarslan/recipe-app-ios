@@ -8,9 +8,11 @@ import SwiftUI
 import Foundation
 
 class user_session: ObservableObject {
+    @AppStorage("kullanici_id") var kullanici_id: Int = 0
+    @AppStorage("kullanici_nm") var kullanici_nm: String = ""
+    @AppStorage("email_adres") var email: String = ""
     
-    @Published var userId: Int?
-    @Published var userName: String = ""
-    @Published var email: String = ""
-    @Published var isLoggedIn: Bool = false
+    var isLoggedIn: Bool {
+        return kullanici_id != 0
+    }
 }

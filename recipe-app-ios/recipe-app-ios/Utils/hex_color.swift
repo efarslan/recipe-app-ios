@@ -22,3 +22,9 @@ extension Color {
         self.init(red: r, green: g, blue: b)
     }
 }
+
+extension Color {
+    static let background = Color(hex: "#f8f8f8")
+    static let primaryColor = Color(hex: "#F5DF40")
+    static let secondaryColor = Color(hex: "433232")
+}

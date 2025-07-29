@@ -9,9 +9,12 @@ import SwiftUI
 
 struct login_view: View {
     @State private var shouldNavigate = false
-    
-    @StateObject private var viewModel = LoginViewModel()
     @EnvironmentObject var session: user_session
+    @StateObject private var viewModel: LoginViewModel
+    
+    init(session: user_session) {
+        _viewModel = StateObject(wrappedValue:  LoginViewModel(session: session))
+    }
     
     var body: some View {
         NavigationStack {
@@ -69,7 +72,7 @@ struct login_view: View {
                 // Kayit Ol
                 HStack {
                     Text("Hesabın yok mu?")
-                    NavigationLink(destination: register_view()) {
+                    NavigationLink(destination: register_view(session: session)) {
                         Text("Kayıt Ol")
                             .foregroundColor(.blue)
                             .fontWeight(.semibold)
@@ -86,7 +89,7 @@ struct login_view: View {
 }
 
 #Preview {
-    login_view()
-        .environmentObject(user_session())
-
+    let previewSession = user_session()
+    login_view(session: previewSession)
+        .environmentObject(previewSession)
 }
